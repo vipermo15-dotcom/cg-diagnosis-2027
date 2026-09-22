@@ -10,6 +10,7 @@
 1. Supabase 대시보드 → SQL Editor
 2. `supabase/schema.md` 안의 SQL 코드 블록 전체를 복사해서 실행 (11개 테이블 + 인덱스 + RLS 활성화)
 3. 이어서 `supabase/rls_and_rpc.sql` 전체를 복사해서 실행 (RLS 잠금 + RPC 함수 4개 + anon 권한 부여)
+4. 관리자 화면을 쓸 계획이면 `supabase/admin_rls.sql` 도 이어서 실행 (admin_users 테이블 + 관리자 전용 RPC 3개)
 
 ## 3. 환경변수 설정
 1. Supabase 대시보드 → Project Settings → API 에서 `Project URL`과 `anon public` 키 확인
@@ -34,11 +35,26 @@ npm run build -- --mode gh-pages
 npx gh-pages -d dist -b gh-pages -r https://github.com/vipermo15-dotcom/cg-diagnosis-2027.git
 ```
 
-## 상담 신청 데이터는 어떻게 확인하나요?
-`consultation_requests` 테이블을 Supabase 대시보드 Table Editor에서 직접 조회하거나, `status = 'new'` 조건으로 필터링하세요. 별도의 관리자 화면은 이번 MVP 범위에 없습니다 — 필요하면 후속 작업으로 요청해주세요.
+## 6. 관리자 화면(상담 신청 목록) 설정
+앱에 `/#admin` 경로로 관리자 화면이 내장되어 있습니다 (예: `https://vipermo15-dotcom.github.io/cg-diagnosis-2027/#admin`). 로그인은 비밀번호 없이 이메일 매직링크로 합니다.
+
+1. Supabase 대시보드 → Authentication → Providers 에서 **Email(매직링크)** 이 켜져 있는지 확인 (기본값이 켜져 있음)
+2. Authentication → URL Configuration 에서 `Site URL`과 `Redirect URLs`에 배포 주소를 등록:
+   - Site URL: `https://vipermo15-dotcom.github.io/cg-diagnosis-2027/`
+   - Redirect URLs: `https://vipermo15-dotcom.github.io/cg-diagnosis-2027/**`
+   (이 설정이 없으면 매직링크 클릭 시 로그인이 완료되지 않습니다)
+3. 관리자가 `/#admin` 화면에서 본인 이메일로 매직링크 로그인을 1회 시도 (아직 admin_users에 없어도 로그인 자체는 되고, `auth.users`에 계정이 생성됩니다)
+4. Supabase 대시보드 SQL Editor에서 그 사람을 관리자로 등록:
+   ```sql
+   insert into public.admin_users (user_id, email)
+   select id, email from auth.users where email = '관리자이메일@example.com';
+   ```
+5. 등록 후 관리자가 다시 로그인하면 상담 신청 목록(희망과정/희망시간/메시지/연결된 진단결과/처리상태)이 보이고, 상태를 신규/연락함/완료로 바꿀 수 있습니다.
+
+admin_users에 없는 사람은 로그인은 되지만 목록 조회 시 "not authorized" 오류만 뜨고 아무 데이터도 보이지 않습니다 — RPC 내부에서 매번 권한을 재확인하기 때문입니다.
 
 ## RLS 설계 요약
 - anon(익명 방문자) 키는 테이블을 **직접 SELECT/INSERT할 수 없습니다.**
-- 대신 `create_diagnosis_session`, `save_diagnosis_answer`, `save_diagnosis_result`, `submit_consultation` 4개 RPC 함수만 실행할 수 있습니다(SECURITY DEFINER로 최소한의 작업만 수행).
-- 즉, 누군가 브라우저 개발자도구로 anon 키를 알아내도 진단 데이터를 통째로 조회하거나 다른 사람 응답을 조작할 수 없습니다.
-- 관리자용 목록 조회 화면을 나중에 만들 경우, **anon/authenticated 에 SELECT 정책을 추가하지 말고** 반드시 서버사이드(Edge Function 등)에서 service_role 키로 조회하세요.
+- 익명 사용자는 `create_diagnosis_session`, `save_diagnosis_answer`, `save_diagnosis_result`, `submit_consultation` 4개 RPC 함수만 실행할 수 있습니다(SECURITY DEFINER로 최소한의 작업만 수행).
+- 로그인한 관리자(authenticated)는 `admin_list_consultations`, `admin_update_consultation_status` 2개 RPC만 실행할 수 있고, 함수 내부에서 매번 `is_admin()`을 확인합니다. admin_users 테이블 자체는 아무도 직접 SELECT할 수 없습니다(service_role 전용).
+- 즉, 누군가 브라우저 개발자도구로 anon 키를 알아내도 진단 데이터를 통째로 조회하거나 다른 사람 응답을 조작할 수 없고, 로그인만으로는 관리자 데이터를 볼 수 없습니다(admin_users 등록이 별도로 필요).
