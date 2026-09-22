@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: process.env.GITHUB_ACTIONS ? '/cg-diagnosis-2027/' : '/',
-})
+  base: mode === 'gh-pages' ? '/cg-diagnosis-2027/' : '/',
+}))
