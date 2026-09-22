@@ -24,7 +24,7 @@ export default function CourseDirectionView({ result }: Props) {
       <div className="card" style={{ opacity: result.courseDirection === 'daytime' ? 0.6 : 1 }}>
         <h3>{evening.name}</h3>
         <p style={{ margin: 0 }}>
-          재직, 직무전환, 경력재진입, 제2직업 준비 등 저녁 시간을 활용하는 학습에 어울립니다.
+          재직, 직무전환, 경력재진입, 인생2모작 준비 등 저녁 시간을 활용하는 학습에 어울립니다.
         </p>
       </div>
 

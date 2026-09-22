@@ -7,7 +7,7 @@ steps:
   - { id: "05", title: 직무 프로젝트, output: 희망 직무 기반 프로젝트 }
   - { id: "06", title: 기업 프로젝트, output: 실무형 프로젝트 }
   - { id: "07", title: 포트폴리오, output: 취업·전환·창업용 포트폴리오 }
-  - { id: "08", title: 취업·창업·제2직업, output: 개인 목표에 따른 다음 단계 }
+  - { id: "08", title: 취업·창업·인생2모작, output: 개인 목표에 따른 다음 단계 }
 overlays:
   bx_brand: [브랜드 프로젝트, BI/BX 결과물]
   advertising_content: [광고·SNS 프로젝트, 숏폼 콘텐츠]

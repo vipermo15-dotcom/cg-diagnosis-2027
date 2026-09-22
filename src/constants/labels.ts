@@ -38,7 +38,7 @@ export const COURSE_DIRECTION_LABELS: Record<string, { title: string; descriptio
   nighttime: {
     title: '야간 과정과 연결되는 응답이에요',
     description:
-      '재직 중 역량 강화, 직무전환, 경력재진입, 제2직업 준비 등과 함께 평일 저녁 시간을 활용하는 방향과 잘 연결됩니다.',
+      '재직 중 역량 강화, 직무전환, 경력재진입, 인생2모작 준비 등과 함께 평일 저녁 시간을 활용하는 방향과 잘 연결됩니다.',
   },
   both: {
     title: '주간·야간 모두와 연결되는 응답이에요',

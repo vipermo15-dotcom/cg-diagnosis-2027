@@ -418,6 +418,6 @@ questions:
     options:
       - { value: course_detail, label: 과정 커리큘럼 상세 }
       - { value: schedule, label: 개강 일정 }
-      - { value: tuition_support, label: 국비지원·수강료 }
+      - { value: tuition_support, label: 서울시지원·수강료 }
       - { value: career_outcome, label: 취업·창업 사례 }
       - { value: consultation, label: 1:1 상담 }

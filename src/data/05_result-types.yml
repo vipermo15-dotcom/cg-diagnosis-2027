@@ -4,7 +4,7 @@ types:
   career_change: { title: 직무전환 탐색형, description: 기존 경력을 디자인·AI 역량과 연결해 새로운 직무로 확장하는 방향입니다. }
   employed_enhancement: { title: 재직자 직무향상형, description: 현재 업무에 디자인·AI 역량을 더해 실무 경쟁력을 높이는 방향입니다. }
   career_reentry: { title: 경력재진입 탐색형, description: 경력 단절 이후 디자인 역량을 통해 다시 진입할 지점을 찾는 방향입니다. }
-  second_career: { title: 제2직업 탐색형, description: 새로운 분야에서 두 번째 커리어를 준비하는 방향입니다. }
+  second_career: { title: 인생2모작 탐색형, description: 새로운 분야에서 두 번째 커리어를 준비하는 방향입니다. }
   entrepreneurship: { title: 창업 탐색형, description: 창업·프리랜서 활동에 필요한 디자인·AI 역량을 준비하는 방향입니다. }
   ai_reskilling: { title: AI 신기술 학습형, description: AI 디자인·자동화 도구를 중심으로 역량을 확장하는 방향입니다. }
   freelancer: { title: 프리랜서 탐색형, description: 독립적으로 일할 수 있는 디자인 역량과 포트폴리오를 준비하는 방향입니다. }
