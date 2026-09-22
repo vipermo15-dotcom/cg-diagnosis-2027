@@ -1,0 +1,162 @@
+# 40문항 개발용 축약 데이터
+questions:
+  - id: Q01
+    section: current_situation
+    type: single
+    key: current_status
+  - id: Q02
+    section: current_situation
+    type: multi
+    key: education_reasons
+  - id: Q03
+    section: current_situation
+    type: single
+    key: desired_outcome
+  - id: Q04
+    section: current_situation
+    type: multi
+    key: needed_change
+  - id: Q05
+    section: current_situation
+    type: single
+    key: career_clarity
+  - id: Q06
+    section: education_goals
+    type: multi
+    key: desired_learning
+  - id: Q07
+    section: education_goals
+    type: scale
+    key: employment_importance
+  - id: Q08
+    section: education_goals
+    type: scale
+    key: entrepreneurship_interest
+  - id: Q09
+    section: education_goals
+    type: scale
+    key: ai_learning_importance
+  - id: Q10
+    section: education_goals
+    type: multi
+    key: desired_outputs
+  - id: Q11
+    section: learning_environment
+    type: single
+    key: learning_time
+  - id: Q12
+    section: learning_environment
+    type: multi
+    key: daytime_constraints
+  - id: Q13
+    section: learning_environment
+    type: single
+    key: evening_availability
+  - id: Q14
+    section: learning_environment
+    type: scale
+    key: effort_level
+  - id: Q15
+    section: career_experience
+    type: multi
+    key: prior_fields
+  - id: Q16
+    section: career_experience
+    type: scale
+    key: experience_design_ai_connection
+  - id: Q17
+    section: career_experience
+    type: single
+    key: prior_design_content
+  - id: Q18
+    section: career_experience
+    type: single
+    key: design_experience_level
+  - id: Q19
+    section: career_experience
+    type: single
+    key: transferable_field
+  - id: Q20
+    section: job_interest
+    type: multi
+    key: brand_tasks
+  - id: Q21
+    section: job_interest
+    type: multi
+    key: advertising_sns_tasks
+  - id: Q22
+    section: job_interest
+    type: multi
+    key: editorial_tasks
+  - id: Q23
+    section: job_interest
+    type: multi
+    key: product_commerce_tasks
+  - id: Q24
+    section: job_interest
+    type: multi
+    key: digital_ai_tasks
+  - id: Q25
+    section: job_interest
+    type: scale
+    key: video_interest
+  - id: Q26
+    section: job_interest
+    type: scale
+    key: commerce_interest
+  - id: Q27
+    section: job_interest
+    type: single
+    key: desired_task
+  - id: Q28
+    section: ai
+    type: single
+    key: ai_usage
+  - id: Q29
+    section: ai
+    type: scale
+    key: ai_image_interest
+  - id: Q30
+    section: ai
+    type: scale
+    key: ai_character_interest
+  - id: Q31
+    section: ai
+    type: scale
+    key: ai_automation_interest
+  - id: Q32
+    section: ai
+    type: scale
+    key: ai_agent_interest
+  - id: Q33
+    section: character_ip
+    type: scale
+    key: character_planning_interest
+  - id: Q34
+    section: character_ip
+    type: multi
+    key: character_use_cases
+  - id: Q35
+    section: character_ip
+    type: scale
+    key: character_ip_interest
+  - id: Q36
+    section: character_ip
+    type: scale
+    key: character_portfolio_interest
+  - id: Q37
+    section: certification_portfolio
+    type: scale
+    key: certification_importance
+  - id: Q38
+    section: certification_portfolio
+    type: multi
+    key: certification_targets
+  - id: Q39
+    section: certification_portfolio
+    type: multi
+    key: portfolio_targets
+  - id: Q40
+    section: certification_portfolio
+    type: multi
+    key: next_information

@@ -1,0 +1,423 @@
+# 2027 컴퓨터그래픽디자인과 지원자 자기진단 — 문항 완성본 (Q01~Q40)
+# 원칙: 적성판정/합격불합격 표현 금지. 연령을 단독 추천근거로 사용하지 않음.
+version: "1.0.0"
+questions:
+  # A. 현재상황 (Q01~Q05)
+  - id: Q01
+    section: current_situation
+    type: single
+    key: current_status
+    text: 지금 나의 상황과 가장 가까운 것은?
+    options:
+      - { value: job_seeking, label: 취업을 준비하고 있다 }
+      - { value: employed, label: 현재 직장을 다니고 있다 }
+      - { value: job_change, label: 다른 분야로 전환을 고민하고 있다 }
+      - { value: career_break, label: 경력이 단절된 상태다 }
+      - { value: reentry, label: 경력을 다시 시작하려 한다 }
+      - { value: pre_retirement, label: 은퇴를 앞두고 있다 }
+      - { value: post_retirement, label: 이미 은퇴했다 }
+      - { value: freelance, label: 프리랜서로 일하고 있다 }
+      - { value: undecided, label: 아직 진로를 정하지 못했다 }
+
+  - id: Q02
+    section: current_situation
+    type: multi
+    key: education_reasons
+    text: 교육을 받으려는 이유는? (복수 선택 가능)
+    options:
+      - { value: employment, label: 취업하고 싶어서 }
+      - { value: job_change, label: 직무를 전환하고 싶어서 }
+      - { value: skill_up, label: 지금 하는 일의 실력을 키우고 싶어서 }
+      - { value: entrepreneurship, label: 창업이나 프리랜서를 준비하려고 }
+      - { value: new_tech, label: AI 등 새로운 기술을 배우고 싶어서 }
+      - { value: portfolio, label: 포트폴리오를 만들고 싶어서 }
+      - { value: interest, label: 디자인 자체에 관심이 있어서 }
+
+  - id: Q03
+    section: current_situation
+    type: single
+    key: desired_outcome
+    text: 교육을 마친 뒤 가장 원하는 결과는?
+    options:
+      - { value: employment, label: 디자인 관련 회사에 취업 }
+      - { value: job_change, label: 지금과 다른 직무로 전환 }
+      - { value: skill_up, label: 현재 업무 역량 향상 }
+      - { value: startup, label: 창업 또는 개인 사업 시작 }
+      - { value: freelance, label: 프리랜서로 일감 수주 }
+      - { value: portfolio, label: 포트폴리오·결과물 확보 }
+      - { value: exploring, label: 아직 결과보다는 가능성을 탐색 중 }
+
+  - id: Q04
+    section: current_situation
+    type: multi
+    key: needed_change
+    text: 지금 나에게 필요한 변화는? (복수 선택 가능)
+    options:
+      - { value: new_skill, label: 새로운 기술·툴 습득 }
+      - { value: portfolio, label: 보여줄 수 있는 결과물 }
+      - { value: certification, label: 자격증 }
+      - { value: network, label: 업계 네트워크·정보 }
+      - { value: confidence, label: 실무 경험을 통한 자신감 }
+      - { value: routine, label: 규칙적인 학습 환경 }
+
+  - id: Q05
+    section: current_situation
+    type: single
+    key: career_clarity
+    text: 원하는 진로 방향이 얼마나 명확한가?
+    options:
+      - { value: very_clear, label: 매우 명확하다 }
+      - { value: somewhat_clear, label: 어느 정도 정했다 }
+      - { value: exploring, label: 몇 가지 방향을 놓고 고민 중이다 }
+      - { value: unclear, label: 아직 잘 모르겠다 }
+
+  # B. 교육목표 (Q06~Q10)
+  - id: Q06
+    section: education_goals
+    type: multi
+    key: desired_learning
+    text: 이번 교육을 통해 배우고 싶은 것은? (복수 선택 가능)
+    options:
+      - { value: design_basics, label: 디자인 기본기 }
+      - { value: brand, label: 브랜드·BX 디자인 }
+      - { value: advertising, label: 광고·SNS 콘텐츠 }
+      - { value: editorial, label: 편집·인쇄 디자인 }
+      - { value: package, label: 패키지·굿즈·커머스 디자인 }
+      - { value: ai_visual, label: AI 비주얼 디자인 }
+      - { value: video, label: 영상 편집 }
+      - { value: character, label: 캐릭터·IP 디자인 }
+
+  - id: Q07
+    section: education_goals
+    type: scale
+    key: employment_importance
+    text: 나에게 취업은 얼마나 중요한 목표인가?
+    scale: { min: 1, max: 5, min_label: 중요하지 않다, max_label: 매우 중요하다 }
+
+  - id: Q08
+    section: education_goals
+    type: scale
+    key: entrepreneurship_interest
+    text: 창업이나 프리랜서 활동에 얼마나 관심이 있는가?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  - id: Q09
+    section: education_goals
+    type: scale
+    key: ai_learning_importance
+    text: AI 관련 기술을 배우는 것이 나에게 얼마나 중요한가?
+    scale: { min: 1, max: 5, min_label: 중요하지 않다, max_label: 매우 중요하다 }
+
+  - id: Q10
+    section: education_goals
+    type: multi
+    key: desired_outputs
+    text: 교육을 통해 얻고 싶은 결과물은? (복수 선택 가능)
+    options:
+      - { value: portfolio, label: 취업용 포트폴리오 }
+      - { value: certification, label: 자격증 }
+      - { value: brand_project, label: 브랜드 프로젝트 결과물 }
+      - { value: commerce_content, label: 상품·커머스 콘텐츠 }
+      - { value: startup_output, label: 창업 아이템·사업계획 }
+      - { value: ai_project, label: AI 활용 프로젝트 }
+
+  # C. 학습환경 (Q11~Q14)
+  - id: Q11
+    section: learning_environment
+    type: single
+    key: learning_time
+    text: 학습 가능한 시간대는?
+    options:
+      - { value: daytime_only, label: 주간(평일 낮)만 가능 }
+      - { value: evening_only, label: 야간(평일 저녁)만 가능 }
+      - { value: both, label: 주간·야간 모두 가능 }
+      - { value: undecided, label: 아직 정하지 못했다 }
+
+  - id: Q12
+    section: learning_environment
+    type: multi
+    key: daytime_constraints
+    text: 주간 학습이 어려운 이유가 있다면? (복수 선택 가능)
+    options:
+      - { value: working, label: 직장을 다니고 있어서 }
+      - { value: childcare, label: 육아·돌봄 때문에 }
+      - { value: commute, label: 통근 거리·시간 때문에 }
+      - { value: other_schedule, label: 다른 일정이 있어서 }
+      - { value: none, label: 특별한 제약 없음 }
+
+  - id: Q13
+    section: learning_environment
+    type: single
+    key: evening_availability
+    text: 야간(저녁) 시간대 수업 참여가 가능한가?
+    options:
+      - { value: fully_available, label: 충분히 가능하다 }
+      - { value: partially_available, label: 부분적으로 가능하다 }
+      - { value: not_available, label: 어렵다 }
+
+  - id: Q14
+    section: learning_environment
+    type: scale
+    key: effort_level
+    text: 교육 기간 동안 투입할 수 있는 노력·시간 수준은?
+    scale: { min: 1, max: 5, min_label: 최소한만 가능, max_label: 최대한 집중 가능 }
+
+  # D. 경력/경험 (Q15~Q19)
+  - id: Q15
+    section: career_experience
+    type: multi
+    key: prior_fields
+    text: 지금까지의 경력·경험 분야는? (복수 선택 가능)
+    options:
+      - { value: office, label: 사무·행정 }
+      - { value: sales_service, label: 영업·서비스 }
+      - { value: manufacturing, label: 생산·제조 }
+      - { value: education, label: 교육 }
+      - { value: design_related, label: 디자인·콘텐츠 관련 }
+      - { value: it, label: IT·개발 }
+      - { value: none, label: 별다른 경력 없음(학생·취업준비) }
+
+  - id: Q16
+    section: career_experience
+    type: scale
+    key: experience_design_ai_connection
+    text: 기존 경력·경험을 디자인이나 AI와 연결할 수 있다고 생각하는 정도는?
+    scale: { min: 1, max: 5, min_label: 연결점이 없다고 생각, max_label: 강하게 연결된다고 생각 }
+
+  - id: Q17
+    section: career_experience
+    type: single
+    key: prior_design_content
+    text: 디자인·콘텐츠 제작 경험이 있는가?
+    options:
+      - { value: professional, label: 실무 경험이 있다 }
+      - { value: hobby, label: 취미·개인 작업으로 해봤다 }
+      - { value: education_only, label: 학교·학원 수업에서만 해봤다 }
+      - { value: none, label: 거의 없다 }
+
+  - id: Q18
+    section: career_experience
+    type: single
+    key: design_experience_level
+    text: 디자인 툴(포토샵, 일러스트 등) 사용 수준은?
+    options:
+      - { value: none, label: 사용해본 적 없다 }
+      - { value: beginner, label: 기본 기능만 안다 }
+      - { value: intermediate, label: 실무에 활용할 수 있다 }
+      - { value: advanced, label: 능숙하게 다룬다 }
+
+  - id: Q19
+    section: career_experience
+    type: single
+    key: transferable_field
+    text: 기존 경력·관심을 어떤 디자인 분야로 이어가고 싶은가?
+    options:
+      - { value: brand_marketing, label: 브랜드·마케팅 }
+      - { value: advertising_content, label: 광고·콘텐츠 }
+      - { value: editorial, label: 편집·출판 }
+      - { value: product_package, label: 상품·패키지 }
+      - { value: ai_design, label: AI 디자인 }
+      - { value: none, label: 해당 없음 }
+
+  # E. 희망직무 (Q20~Q27)
+  - id: Q20
+    section: job_interest
+    type: multi
+    key: brand_tasks
+    text: 관심 있는 브랜드·BX 업무는? (복수 선택 가능)
+    options:
+      - { value: bi_logo, label: 로고·BI 디자인 }
+      - { value: brand_guide, label: 브랜드 가이드라인 }
+      - { value: brand_content, label: 브랜드 콘텐츠 }
+      - { value: none, label: 해당 없음 }
+
+  - id: Q21
+    section: job_interest
+    type: multi
+    key: advertising_sns_tasks
+    text: 관심 있는 광고·SNS 업무는? (복수 선택 가능)
+    options:
+      - { value: sns_content, label: SNS 카드뉴스·콘텐츠 }
+      - { value: ad_video, label: 광고 영상 }
+      - { value: youtube, label: 유튜브·숏폼 콘텐츠 }
+      - { value: none, label: 해당 없음 }
+
+  - id: Q22
+    section: job_interest
+    type: multi
+    key: editorial_tasks
+    text: 관심 있는 편집·인쇄 업무는? (복수 선택 가능)
+    options:
+      - { value: book_magazine, label: 책·잡지 편집 }
+      - { value: brochure, label: 브로슈어·리플릿 }
+      - { value: brand_book, label: 브랜드북·인쇄물 }
+      - { value: none, label: 해당 없음 }
+
+  - id: Q23
+    section: job_interest
+    type: multi
+    key: product_commerce_tasks
+    text: 관심 있는 상품·커머스 업무는? (복수 선택 가능)
+    options:
+      - { value: detail_page, label: 상세페이지 디자인 }
+      - { value: shopping_mall, label: 쇼핑몰 콘텐츠 }
+      - { value: product_content, label: 상품·굿즈 콘텐츠 }
+      - { value: none, label: 해당 없음 }
+
+  - id: Q24
+    section: job_interest
+    type: multi
+    key: digital_ai_tasks
+    text: 관심 있는 디지털·AI 업무는? (복수 선택 가능)
+    options:
+      - { value: ai_image, label: AI 이미지 생성 }
+      - { value: ai_design, label: AI 활용 디자인 작업 }
+      - { value: ai_video, label: AI 영상 제작 }
+      - { value: ai_character, label: AI 캐릭터 제작 }
+      - { value: digital_content, label: 디지털 콘텐츠 전반 }
+      - { value: none, label: 해당 없음 }
+
+  - id: Q25
+    section: job_interest
+    type: scale
+    key: video_interest
+    text: 영상 제작·편집에 대한 관심도는?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  - id: Q26
+    section: job_interest
+    type: scale
+    key: commerce_interest
+    text: 상품·커머스 콘텐츠 제작에 대한 관심도는?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  - id: Q27
+    section: job_interest
+    type: single
+    key: desired_task
+    text: 가장 먼저 해보고 싶은 업무 하나를 고른다면?
+    options:
+      - { value: brand, label: 브랜드·BX 디자인 }
+      - { value: advertising, label: 광고·콘텐츠 디자인 }
+      - { value: editorial, label: 편집·인쇄 디자인 }
+      - { value: package, label: 패키지·굿즈·커머스 디자인 }
+      - { value: ai_design, label: 디지털·AI 비주얼 디자인 }
+
+  # F. AI/신기술 (Q28~Q32)
+  - id: Q28
+    section: ai
+    type: single
+    key: ai_usage
+    text: 현재 AI 도구를 얼마나 사용하고 있는가?
+    options:
+      - { value: never, label: 사용해본 적 없다 }
+      - { value: rarely, label: 가끔 사용한다 }
+      - { value: regularly, label: 자주 사용한다 }
+      - { value: daily, label: 업무·일상에서 항상 사용한다 }
+
+  - id: Q29
+    section: ai
+    type: scale
+    key: ai_image_interest
+    text: AI 이미지 생성 도구를 배우는 것에 대한 관심도는?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  - id: Q30
+    section: ai
+    type: scale
+    key: ai_character_interest
+    text: AI로 캐릭터를 만드는 것에 대한 관심도는?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  - id: Q31
+    section: ai
+    type: scale
+    key: ai_automation_interest
+    text: 반복 업무를 AI로 자동화하는 것에 대한 관심도는?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  - id: Q32
+    section: ai
+    type: scale
+    key: ai_agent_interest
+    text: AI 에이전트(자동화 도구 연결)를 배우는 것에 대한 관심도는?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  # G. 캐릭터/IP (Q33~Q36)
+  - id: Q33
+    section: character_ip
+    type: scale
+    key: character_planning_interest
+    text: 캐릭터를 기획하는 것에 대한 관심도는?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  - id: Q34
+    section: character_ip
+    type: multi
+    key: character_use_cases
+    text: 캐릭터를 어디에 활용하고 싶은가? (복수 선택 가능)
+    options:
+      - { value: brand_mascot, label: 브랜드 마스코트 }
+      - { value: goods, label: 굿즈 제작 }
+      - { value: content, label: 콘텐츠·SNS }
+      - { value: startup_item, label: 창업 아이템 }
+      - { value: none, label: 해당 없음 }
+
+  - id: Q35
+    section: character_ip
+    type: scale
+    key: character_ip_interest
+    text: 나만의 캐릭터 IP를 만드는 것에 대한 관심도는?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  - id: Q36
+    section: character_ip
+    type: scale
+    key: character_portfolio_interest
+    text: 캐릭터 중심 포트폴리오를 만드는 것에 대한 관심도는?
+    scale: { min: 1, max: 5, min_label: 관심 없다, max_label: 매우 관심 있다 }
+
+  # H. 자격증/포트폴리오 (Q37~Q40)
+  - id: Q37
+    section: certification_portfolio
+    type: scale
+    key: certification_importance
+    text: 자격증 취득이 나에게 얼마나 중요한가?
+    scale: { min: 1, max: 5, min_label: 중요하지 않다, max_label: 매우 중요하다 }
+
+  - id: Q38
+    section: certification_portfolio
+    type: multi
+    key: certification_targets
+    text: 취득하고 싶은 자격증은? (복수 선택 가능)
+    options:
+      - { value: gtq, label: GTQ 그래픽기술자격 }
+      - { value: gtqi, label: GTQi 일러스트 }
+      - { value: computer_graphics, label: 컴퓨터그래픽운용기능사 }
+      - { value: adobe_ai_associate, label: Adobe Certified Professional }
+      - { value: none, label: 특별히 없음 }
+
+  - id: Q39
+    section: certification_portfolio
+    type: multi
+    key: portfolio_targets
+    text: 포트폴리오에 담고 싶은 내용은? (복수 선택 가능)
+    options:
+      - { value: brand_project, label: 브랜드·BX 프로젝트 }
+      - { value: ai_project, label: AI 활용 프로젝트 }
+      - { value: character_ip, label: 캐릭터·IP 프로젝트 }
+      - { value: shortform_video, label: 숏폼·영상 콘텐츠 }
+      - { value: startup_project, label: 창업·사업 아이템 프로젝트 }
+      - { value: commerce_project, label: 상품·커머스 프로젝트 }
+
+  - id: Q40
+    section: certification_portfolio
+    type: multi
+    key: next_information
+    text: 다음에 더 알고 싶은 정보는? (복수 선택 가능)
+    options:
+      - { value: course_detail, label: 과정 커리큘럼 상세 }
+      - { value: schedule, label: 개강 일정 }
+      - { value: tuition_support, label: 국비지원·수강료 }
+      - { value: career_outcome, label: 취업·창업 사례 }
+      - { value: consultation, label: 1:1 상담 }

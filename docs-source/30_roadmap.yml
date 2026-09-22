@@ -1,0 +1,17 @@
+version: "1.0.0"
+steps:
+  - {id: "01", title: 전공기초, output: 디자인 기본기}
+  - {id: "02", title: AI 디자인, output: AI를 활용한 디자인 결과물}
+  - {id: "03", title: AI Workflow, output: 개인 작업 프로세스}
+  - {id: "04", title: AI Agent, output: 반복업무·정보탐색 자동화 실험}
+  - {id: "05", title: 직무 프로젝트, output: 희망 직무 기반 프로젝트}
+  - {id: "06", title: 기업 프로젝트, output: 실무형 프로젝트}
+  - {id: "07", title: 포트폴리오, output: 취업·전환·창업용 포트폴리오}
+  - {id: "08", title: 취업·창업·제2직업, output: 개인 목표에 따른 다음 단계}
+overlays:
+  bx_brand: [브랜드 프로젝트, BI/BX 결과물]
+  advertising_content: [광고·SNS 프로젝트, 숏폼 콘텐츠]
+  editorial_print: [편집 프로젝트, 브랜드북·인쇄물]
+  package_goods_commerce: [패키지·굿즈 프로젝트, 상품 콘텐츠]
+  digital_ai_visual: [AI 이미지·영상·자동화 프로젝트]
+  character_designer: [AI 캐릭터 기획, 캐릭터 응용, IP 포트폴리오]

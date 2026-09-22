@@ -1,0 +1,24 @@
+version: "1.0.0"
+courses:
+  cg_day:
+    name: 컴퓨터그래픽디자인 주간
+    focus: [design, brand, advertising, editorial, package, ai_visual, portfolio]
+  cg_night:
+    name: 컴퓨터그래픽디자인 야간
+    focus: [job_enhancement, career_change, career_reentry, ai, character_ip, portfolio]
+  smart_ai_shopping:
+    name: 스마트AI쇼핑몰
+    focus: [product, detail_page, shopping_mall, commerce, sns]
+  broadcast_creator:
+    name: 방송크리에이터
+    focus: [video, shooting, editing, youtube, broadcast, shortform]
+routing:
+  commerce: {when: [Q23.detail_page, Q23.shopping_mall, Q23.product_content, Q26], compare: [cg_day, smart_ai_shopping]}
+  video: {when: [Q25, Q21.youtube, Q21.ad_video, Q24.ai_video], compare: [cg_day, broadcast_creator]}
+  character: {when: [Q30, Q33, Q35, Q39.character_ip], compare: [cg_day, cg_night]}
+  brand_content: {when: [bx_brand, advertising_content, editorial_print], compare: [cg_day, cg_night]}
+  ai_visual: {when: [digital_ai_visual], compare: [cg_day, cg_night]}
+user_display:
+  show_relation: true
+  show_rank: false
+  show_best_course: false

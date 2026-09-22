@@ -1,0 +1,13 @@
+version: "1.0.0"
+types:
+  youth_employment: {title: 취업 준비형}
+  career_change: {title: 직무전환 탐색형}
+  employed_enhancement: {title: 재직자 직무향상형}
+  career_reentry: {title: 경력재진입 탐색형}
+  second_career: {title: 제2직업 탐색형}
+  entrepreneurship: {title: 창업 탐색형}
+  ai_reskilling: {title: AI 신기술 학습형}
+  freelancer: {title: 프리랜서 탐색형}
+  career_exploration: {title: 진로탐색형}
+display:
+  avoid: [aptitude_score, pass_fail, winner_rank]

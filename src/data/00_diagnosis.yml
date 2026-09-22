@@ -1,0 +1,26 @@
+system:
+  id: cg_self_diagnosis_2027
+  version: "1.0.0"
+  title: "2027 컴퓨터그래픽디자인과 지원자 자기진단"
+  estimated_time: "3~5분"
+  question_count: 40
+  mode: education_navigation
+courses:
+  daytime:
+    code: cg_day
+    name: 컴퓨터그래픽디자인 주간
+    goals: [employment, entrepreneurship, new_technology]
+  evening:
+    code: cg_night
+    name: 컴퓨터그래픽디자인 야간
+    goals: [job_enhancement, career_change, career_reentry, employment, entrepreneurship, second_career, ai_reskilling]
+  related:
+    - { code: smart_ai_shopping, name: 스마트AI쇼핑몰 }
+    - { code: broadcast_creator, name: 방송크리에이터 }
+tracks: [bx_brand, advertising_content, editorial_print, package_goods_commerce, digital_ai_visual]
+result_policy:
+  show_primary_secondary: true
+  show_course_comparison: true
+  show_roadmap: true
+  show_score_as_aptitude: false
+  show_ranked_winner: false

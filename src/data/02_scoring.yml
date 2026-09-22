@@ -1,0 +1,29 @@
+version: "1.0.0"
+mode: beta_routing
+course_direction:
+  daytime: { employment: 30, entrepreneurship: 25, new_technology: 25, portfolio: 15, career_change: 15 }
+  nighttime: { job_enhancement: 30, career_change: 28, career_reentry: 30, second_career: 30, employment: 25, entrepreneurship: 25, ai_reskilling: 20, portfolio: 15 }
+routing:
+  close_range_points: 8
+  clear_direction_min_score: 80
+  clear_direction_min_difference: 15
+  outputs: [daytime, nighttime, both, exploration]
+job_tracks:
+  bx_brand: [Q20, Q27.brand, Q19.brand_marketing]
+  advertising_content: [Q21, Q25, Q27.advertising, Q19.advertising_content]
+  editorial_print: [Q22, Q27.editorial, Q19.editorial]
+  package_goods_commerce: [Q23, Q26, Q27.package, Q19.product_package]
+  digital_ai_visual: [Q24, Q29, Q31, Q32, Q27.ai_design]
+ai_profile:
+  image_generation: [Q29, Q24.ai_image]
+  design_assistance: [Q09, Q28, Q24.ai_design]
+  ai_character: [Q30, Q24.ai_character, Q33]
+  ai_content: [Q24.ai_video, Q24.digital_content, Q25]
+  workflow_automation: [Q31]
+  agent: [Q32]
+  certification: [Q37, Q38.adobe_ai_associate]
+night_tracks:
+  ai_designer: [Q09, Q29, Q37, Q38.gtq, Q38.gtqi, Q38.computer_graphics, Q38.adobe_ai_associate]
+  character_designer: [Q30, Q33, Q34, Q35, Q36, Q39.character_ip]
+  content_creator: [Q21, Q24.ai_video, Q24.digital_content, Q25, Q39.shortform_video]
+  ai_startup: [Q08, Q02.entrepreneurship, Q03.startup, Q10.startup_output, Q34.startup_item, Q35, Q39.startup_project]

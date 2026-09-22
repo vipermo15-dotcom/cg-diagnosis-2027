@@ -1,0 +1,11 @@
+version: "1.0.0"
+tracks:
+  ai_designer: { title: AI 디자이너, signals: [Q09, Q29, Q37, Q38.gtq, Q38.gtqi, Q38.computer_graphics, Q38.adobe_ai_associate] }
+  character_designer: { title: 캐릭터 디자이너, signals: [Q30, Q33, Q34, Q35, Q36, Q39.character_ip] }
+  content_creator: { title: 콘텐츠 크리에이터, signals: [Q21, Q24.ai_video, Q24.digital_content, Q25, Q39.shortform_video] }
+  ai_startup: { title: AI 창업, signals: [Q08, Q02.entrepreneurship, Q03.startup, Q10.startup_output, Q34.startup_item, Q35, Q39.startup_project] }
+selection:
+  primary: highest_normalized_score
+  secondary_if_gap_lte: 15
+  tie: show_both
+  note: 탐색 결과이며 확정 진로 판정이 아님

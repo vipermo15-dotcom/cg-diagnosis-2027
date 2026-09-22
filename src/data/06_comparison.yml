@@ -1,0 +1,9 @@
+version: "1.0.0"
+courses:
+  computer_graphic: { name: 컴퓨터그래픽디자인, keywords: [브랜드, 광고, 콘텐츠, 편집, 패키지, AI 비주얼, 포트폴리오] }
+  smart_ai_shopping: { name: 스마트AI쇼핑몰, keywords: [상품, 상세페이지, 쇼핑몰, 커머스, SNS, 상품 콘텐츠] }
+  broadcast_creator: { name: 방송크리에이터, keywords: [영상, 촬영, 편집, YouTube, 방송, 숏폼, AI 영상] }
+dimensions: [job_interest, project_output, ai_usage, portfolio_direction, learning_environment]
+language:
+  title: 내 관심 분야와 연결되는 과정 비교
+  rule: 우열/순위가 아니라 관심영역과 교육내용의 연결관계를 보여준다.
