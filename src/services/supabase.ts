@@ -26,21 +26,20 @@ function stubLog(action: string, payload?: unknown) {
   console.info(`[stub] Supabase not configured, skipping persist: ${action}`, payload)
 }
 
+// 테이블 직접 접근 대신 SECURITY DEFINER RPC만 호출한다 (supabase/rls_and_rpc.sql 참고).
+// anon 키는 테이블 SELECT/INSERT 권한이 전혀 없고, 이 4개 함수 실행 권한만 가진다.
+
 export async function createSession(): Promise<{ sessionId: string | null }> {
   if (!isSupabaseConfigured || !supabase) {
     stubLog('createSession')
     return { sessionId: null }
   }
-  const { data, error } = await supabase
-    .from('diagnosis_sessions')
-    .insert({ status: 'started' })
-    .select('id')
-    .single()
+  const { data, error } = await supabase.rpc('create_diagnosis_session')
   if (error) {
     console.error('createSession failed', error)
     return { sessionId: null }
   }
-  return { sessionId: data?.id ?? null }
+  return { sessionId: (data as string) ?? null }
 }
 
 export async function saveAnswer(
@@ -52,12 +51,11 @@ export async function saveAnswer(
     stubLog('saveAnswer', { questionId, value })
     return
   }
-  const { error } = await supabase
-    .from('diagnosis_answers')
-    .upsert(
-      { session_id: sessionId, question_id: questionId, answer_value: value },
-      { onConflict: 'session_id,question_id' },
-    )
+  const { error } = await supabase.rpc('save_diagnosis_answer', {
+    p_session_id: sessionId,
+    p_question_id: questionId,
+    p_answer_value: value,
+  })
   if (error) console.error('saveAnswer failed', error)
 }
 
@@ -69,17 +67,17 @@ export async function saveResult(
     stubLog('saveResult', result)
     return
   }
-  const { error } = await supabase.from('diagnosis_results').insert({
-    session_id: sessionId,
-    life_stage: result.lifeStage,
-    course_direction: result.courseDirection,
-    primary_track: result.jobTrack.primary,
-    secondary_track: result.jobTrack.secondary,
-    night_career_track: result.nightCareer?.primary,
-    result_title: result.resultTitle,
-    result_summary: result.resultSummary,
-    ai_profile: result.aiProfile,
-    roadmap: result.roadmap,
+  const { error } = await supabase.rpc('save_diagnosis_result', {
+    p_session_id: sessionId,
+    p_life_stage: result.lifeStage,
+    p_course_direction: result.courseDirection,
+    p_primary_track: result.jobTrack.primary,
+    p_secondary_track: result.jobTrack.secondary ?? null,
+    p_night_career_track: result.nightCareer?.primary ?? null,
+    p_result_title: result.resultTitle,
+    p_result_summary: result.resultSummary,
+    p_ai_profile: result.aiProfile,
+    p_roadmap: result.roadmap,
   })
   if (error) console.error('saveResult failed', error)
 }
@@ -92,12 +90,11 @@ export async function submitConsultation(
     stubLog('submitConsultation', { sessionId, ...request })
     return { ok: true }
   }
-  const { error } = await supabase.from('consultation_requests').insert({
-    session_id: sessionId,
-    preferred_course: request.preferredCourse,
-    preferred_time: request.preferredTime,
-    message: request.message,
-    status: 'new',
+  const { error } = await supabase.rpc('submit_consultation', {
+    p_session_id: sessionId,
+    p_preferred_course: request.preferredCourse,
+    p_preferred_time: request.preferredTime,
+    p_message: request.message,
   })
   if (error) {
     console.error('submitConsultation failed', error)
