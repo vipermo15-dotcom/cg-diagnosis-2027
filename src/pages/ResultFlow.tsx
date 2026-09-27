@@ -20,6 +20,9 @@ interface Props {
 // 화면 순서: 6 결과 -> 7 직무방향 -> 8 주간/야간 -> 9 과정비교 -> 10 로드맵
 // -> 11 야간트랙(해당 시) -> 12 AI/캐릭터 프로필 -> 13 상담 -> 14 지원
 export default function ResultFlow({ result, sessionId, onRestart }: Props) {
+  const [index, setIndex] = useState(0)
+  const [consultationSubmitted, setConsultationSubmitted] = useState(false)
+
   const steps = useMemo(() => {
     const base: { key: string; render: () => JSX.Element }[] = [
       { key: 'summary', render: () => <ResultSummary result={result} /> },
@@ -44,13 +47,19 @@ export default function ResultFlow({ result, sessionId, onRestart }: Props) {
         />
       ),
     })
-    base.push({ key: 'apply', render: () => <ApplyCta onRestart={onRestart} /> })
+    base.push({
+      key: 'apply',
+      render: () => (
+        <ApplyCta
+          onRestart={onRestart}
+          onGoToConsultation={() => setIndex(base.findIndex((s) => s.key === 'consultation'))}
+        />
+      ),
+    })
     return base
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [result])
-
-  const [index, setIndex] = useState(0)
-  const [consultationSubmitted, setConsultationSubmitted] = useState(false)
+    // consultationSubmitted가 빠지면 상담 신청 성공 후에도 "접수됐어요" 화면이 뜨지 않는다
+    // (steps가 기억해둔 예전 렌더 함수가 신청 전 상태를 계속 참조하게 됨).
+  }, [result, sessionId, onRestart, consultationSubmitted])
 
   const isLast = index === steps.length - 1
   const isFirst = index === 0

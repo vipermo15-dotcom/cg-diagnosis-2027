@@ -1,8 +1,9 @@
 interface Props {
   onRestart: () => void
+  onGoToConsultation: () => void
 }
 
-export default function ApplyCta({ onRestart }: Props) {
+export default function ApplyCta({ onRestart, onGoToConsultation }: Props) {
   return (
     <div>
       <div className="eyebrow">지원하기</div>
@@ -21,7 +22,12 @@ export default function ApplyCta({ onRestart }: Props) {
         </p>
       </div>
 
-      <button type="button" className="btn btn-primary" style={{ marginTop: 12 }}>
+      <button
+        type="button"
+        className="btn btn-primary"
+        style={{ marginTop: 12 }}
+        onClick={onGoToConsultation}
+      >
         지원 문의하기
       </button>
       <button type="button" className="btn btn-ghost" style={{ marginTop: 8 }} onClick={onRestart}>

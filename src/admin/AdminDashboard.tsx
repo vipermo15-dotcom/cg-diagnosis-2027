@@ -5,11 +5,18 @@ import {
   signOut,
   type ConsultationRow,
 } from '../services/supabaseAdmin'
+import { diagnosisConfig } from '../data'
 
 const STATUS_LABEL: Record<string, string> = {
   new: '신규',
   contacted: '연락함',
   done: '완료',
+}
+
+const COURSE_NAME: Record<string, string> = {
+  [diagnosisConfig.courses.daytime.code]: diagnosisConfig.courses.daytime.name,
+  [diagnosisConfig.courses.evening.code]: diagnosisConfig.courses.evening.name,
+  ...Object.fromEntries(diagnosisConfig.courses.related.map((c) => [c.code, c.name])),
 }
 
 export default function AdminDashboard() {
@@ -75,7 +82,11 @@ export default function AdminDashboard() {
                   <td style={{ padding: '8px 6px', whiteSpace: 'nowrap' }}>
                     {new Date(row.requestedAt).toLocaleString('ko-KR')}
                   </td>
-                  <td style={{ padding: '8px 6px' }}>{row.preferredCourse ?? '-'}</td>
+                  <td style={{ padding: '8px 6px' }}>
+                    {(row.preferredCourse && COURSE_NAME[row.preferredCourse]) ??
+                      row.preferredCourse ??
+                      '-'}
+                  </td>
                   <td style={{ padding: '8px 6px' }}>{row.preferredTime ?? '-'}</td>
                   <td style={{ padding: '8px 6px', maxWidth: 220 }}>{row.message ?? '-'}</td>
                   <td style={{ padding: '8px 6px' }}>
