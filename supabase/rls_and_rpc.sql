@@ -65,6 +65,11 @@ begin
 end;
 $$;
 
+-- applicant_rls.sql이 course_comparison jsonb 파라미터를 추가하면서 원래의 10개 파라미터
+-- 버전과는 다른 시그니처가 되어 Postgres가 이를 오버로드로 취급, 옛 버전이 grant와 함께
+-- 그대로 남아 호출 가능한 상태가 된다. 재실행 시 옛 오버로드를 먼저 제거해 정리한다.
+drop function if exists public.save_diagnosis_result(uuid, text, text, text, text, text, text, text, jsonb, jsonb);
+
 create or replace function public.save_diagnosis_result(
   p_session_id uuid,
   p_life_stage text,
@@ -75,7 +80,8 @@ create or replace function public.save_diagnosis_result(
   p_result_title text,
   p_result_summary text,
   p_ai_profile jsonb,
-  p_roadmap jsonb
+  p_roadmap jsonb,
+  p_course_comparison jsonb
 )
 returns void
 language plpgsql
@@ -89,11 +95,11 @@ begin
 
   insert into public.diagnosis_results (
     session_id, life_stage, course_direction, primary_track, secondary_track,
-    night_career_track, result_title, result_summary, ai_profile, roadmap
+    night_career_track, result_title, result_summary, ai_profile, roadmap, course_comparison
   )
   values (
     p_session_id, p_life_stage, p_course_direction, p_primary_track, p_secondary_track,
-    p_night_career_track, p_result_title, p_result_summary, p_ai_profile, p_roadmap
+    p_night_career_track, p_result_title, p_result_summary, p_ai_profile, p_roadmap, p_course_comparison
   )
   on conflict (session_id) do update set
     life_stage = excluded.life_stage,
@@ -104,7 +110,8 @@ begin
     result_title = excluded.result_title,
     result_summary = excluded.result_summary,
     ai_profile = excluded.ai_profile,
-    roadmap = excluded.roadmap;
+    roadmap = excluded.roadmap,
+    course_comparison = excluded.course_comparison;
 
   update public.diagnosis_sessions set status = 'completed', completed_at = now()
   where id = p_session_id;
@@ -131,7 +138,7 @@ $$;
 -- 3) anon 에게 함수 실행 권한만 부여 (테이블 직접 권한은 위에서 revoke 했으므로 안전)
 grant execute on function public.create_diagnosis_session() to anon;
 grant execute on function public.save_diagnosis_answer(uuid, text, jsonb) to anon;
-grant execute on function public.save_diagnosis_result(uuid, text, text, text, text, text, text, text, jsonb, jsonb) to anon;
+grant execute on function public.save_diagnosis_result(uuid, text, text, text, text, text, text, text, jsonb, jsonb, jsonb) to anon;
 grant execute on function public.submit_consultation(uuid, text, text, text) to anon;
 
 -- 4) 강사/관리자 조회용 — service_role 키로만 접근 가능 (RLS는 service_role을 우회하므로 별도 정책 불필요).

@@ -11,6 +11,7 @@
 2. `supabase/schema.md` 안의 SQL 코드 블록 전체를 복사해서 실행 (11개 테이블 + 인덱스 + RLS 활성화)
 3. 이어서 `supabase/rls_and_rpc.sql` 전체를 복사해서 실행 (RLS 잠금 + RPC 함수 4개 + anon 권한 부여)
 4. 관리자 화면을 쓸 계획이면 `supabase/admin_rls.sql` 도 이어서 실행 (admin_users 테이블 + 관리자 전용 RPC 3개)
+5. "내 결과 다시 보기"(예비 지원자) 기능을 쓸 계획이면 `supabase/applicant_rls.sql` 도 이어서 실행 (applicants 테이블 보강 + 관련 RPC 3개)
 
 ## 3. 환경변수 설정
 1. Supabase 대시보드 → Project Settings → API 에서 `Project URL`과 `anon public` 키 확인
@@ -55,6 +56,7 @@ admin_users에 없는 사람은 로그인은 되지만 목록 조회 시 "not au
 
 ## RLS 설계 요약
 - anon(익명 방문자) 키는 테이블을 **직접 SELECT/INSERT할 수 없습니다.**
-- 익명 사용자는 `create_diagnosis_session`, `save_diagnosis_answer`, `save_diagnosis_result`, `submit_consultation` 4개 RPC 함수만 실행할 수 있습니다(SECURITY DEFINER로 최소한의 작업만 수행).
+- 익명 사용자는 `create_diagnosis_session`, `save_diagnosis_answer`, `save_diagnosis_result`, `submit_consultation`, `link_result_to_email` 5개 RPC 함수만 실행할 수 있습니다(SECURITY DEFINER로 최소한의 작업만 수행).
 - 로그인한 관리자(authenticated)는 `admin_list_consultations`, `admin_update_consultation_status` 2개 RPC만 실행할 수 있고, 함수 내부에서 매번 `is_admin()`을 확인합니다. admin_users 테이블 자체는 아무도 직접 SELECT할 수 없습니다(service_role 전용).
+- 로그인한 예비 지원자(authenticated)는 `claim_applicant_account`, `get_my_results` 2개 RPC만 실행할 수 있고, `get_my_results`는 항상 `auth.uid()`로 본인 소유 결과 1건만 반환합니다. applicants/diagnosis_results 테이블도 anon/authenticated가 직접 SELECT할 수 없습니다.
 - 즉, 누군가 브라우저 개발자도구로 anon 키를 알아내도 진단 데이터를 통째로 조회하거나 다른 사람 응답을 조작할 수 없고, 로그인만으로는 관리자 데이터를 볼 수 없습니다(admin_users 등록이 별도로 필요).
