@@ -24,7 +24,9 @@ export async function sendMagicLink(email: string): Promise<{ ok: boolean; error
   if (!isSupabaseConfigured || !supabase) {
     return { ok: false, error: 'Supabase가 설정되지 않았습니다 (.env 확인).' }
   }
-  const { error } = await supabase.auth.signInWithOtp({ email })
+  // 대시보드 Site URL 설정에 기대지 않고, 이 앱이 실제로 배포된 경로로 명시적으로 돌아오게 한다.
+  const redirectTo = `${window.location.origin}${import.meta.env.BASE_URL}`
+  const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: redirectTo } })
   if (error) return { ok: false, error: error.message }
   return { ok: true }
 }
