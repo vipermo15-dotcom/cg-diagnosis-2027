@@ -9,7 +9,7 @@ import NightCareerView from './result/NightCareerView'
 import AiProfileView from './result/AiProfileView'
 import ConsultationForm from './result/ConsultationForm'
 import ApplyCta from './result/ApplyCta'
-import { submitConsultation } from '../services/supabase'
+import { submitConsultation, linkResultToEmail } from '../services/supabase'
 
 interface Props {
   result: DiagnosisResult
@@ -25,7 +25,15 @@ export default function ResultFlow({ result, sessionId, onRestart }: Props) {
 
   const steps = useMemo(() => {
     const base: { key: string; render: () => JSX.Element }[] = [
-      { key: 'summary', render: () => <ResultSummary result={result} /> },
+      {
+        key: 'summary',
+        render: () => (
+          <ResultSummary
+            result={result}
+            onSaveEmail={(email) => linkResultToEmail(sessionId, email)}
+          />
+        ),
+      },
       { key: 'job', render: () => <JobTrackView result={result} /> },
       { key: 'direction', render: () => <CourseDirectionView result={result} /> },
       { key: 'comparison', render: () => <CourseComparisonView result={result} /> },
