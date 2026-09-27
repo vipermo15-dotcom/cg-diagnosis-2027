@@ -12,8 +12,10 @@ export default function ResultSummary({ result, onSaveEmail }: Props) {
   const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+
   const handleSave = async () => {
-    if (!onSaveEmail || !email.trim()) return
+    if (!onSaveEmail || !isValidEmail) return
     setStatus('saving')
     const { ok, error } = await onSaveEmail(email.trim())
     if (ok) {
@@ -58,6 +60,10 @@ export default function ResultSummary({ result, onSaveEmail }: Props) {
               <p style={{ margin: '0 0 8px' }}>
                 입력하지 않아도 결과 확인에는 지장이 없어요. (선택 사항)
               </p>
+              <p style={{ margin: '0 0 8px', fontSize: 12, color: 'var(--color-text-muted)' }}>
+                입력하신 이메일은 로그인 확인 및 결과 재확인 용도로만 사용되며, 별도 요청 시
+                삭제할 수 있습니다.
+              </p>
               <div className="field">
                 <input
                   type="email"
@@ -69,7 +75,7 @@ export default function ResultSummary({ result, onSaveEmail }: Props) {
               <button
                 type="button"
                 className="btn btn-secondary"
-                disabled={!email.trim() || status === 'saving'}
+                disabled={!isValidEmail || status === 'saving'}
                 onClick={() => void handleSave()}
               >
                 {status === 'saving' ? '저장 중...' : '이 이메일로 저장하기'}

@@ -108,9 +108,12 @@ export async function linkResultToEmail(
   sessionId: string | null,
   email: string,
 ): Promise<{ ok: boolean; error?: string }> {
-  if (!isSupabaseConfigured || !supabase || !sessionId) {
+  if (!isSupabaseConfigured || !supabase) {
     stubLog('linkResultToEmail', { sessionId, email })
     return { ok: true }
+  }
+  if (!sessionId) {
+    return { ok: false, error: '진단 세션을 찾을 수 없습니다. 페이지를 새로고침한 뒤 다시 시도해주세요.' }
   }
   const { error } = await supabase.rpc('link_result_to_email', {
     p_session_id: sessionId,

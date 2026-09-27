@@ -14,8 +14,12 @@
 alter table public.applicants
   add column if not exists user_id uuid unique references auth.users(id) on delete set null;
 
-alter table public.applicants
-  add constraint applicants_email_key unique (email);
+do $$
+begin
+  alter table public.applicants add constraint applicants_email_key unique (email);
+exception
+  when duplicate_object then null;
+end $$;
 
 -- 2) 다시보기용 저장 컬럼 (지금까지는 저장되지 않던 필드)
 alter table public.diagnosis_results
@@ -43,8 +47,10 @@ begin
   end if;
 
   -- consent_privacy는 이 기능과 무관한 별도 동의 항목이므로 여기서 건드리지 않는다.
+  -- Supabase Auth는 JWT의 email을 소문자로 정규화하므로, 나중에 claim_applicant_account가
+  -- 대소문자 차이로 매칭에 실패하지 않도록 저장 시점에 미리 소문자로 정규화한다.
   insert into public.applicants (email)
-  values (p_email)
+  values (lower(trim(p_email)))
   on conflict (email) do update set email = excluded.email
   returning id into v_applicant_id;
 
@@ -61,7 +67,7 @@ as $$
 begin
   update public.applicants
   set user_id = auth.uid()
-  where email = auth.jwt() ->> 'email'
+  where lower(email) = lower(auth.jwt() ->> 'email')
     and user_id is null;
 end;
 $$;

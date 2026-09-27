@@ -13,8 +13,8 @@ export default function Consent({ onNext, onPrev }: Props) {
       <div className="eyebrow">개인정보 수집·이용 동의</div>
       <h1>진단을 시작하기 전에 동의가 필요합니다</h1>
       <p>
-        자기진단 응답은 교육 방향 안내 목적으로만 사용됩니다. 상담을 신청하지 않는 한
-        연락처를 수집하지 않습니다.
+        자기진단 응답은 교육 방향 안내 목적으로만 사용됩니다. 상담을 신청하거나 결과를
+        이메일로 저장하실 때만 연락처를 수집합니다.
       </p>
 
       <label className="checkbox-row" htmlFor="consent-checkbox">

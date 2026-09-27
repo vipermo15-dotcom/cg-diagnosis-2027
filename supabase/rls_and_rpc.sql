@@ -65,6 +65,11 @@ begin
 end;
 $$;
 
+-- applicant_rls.sql이 course_comparison jsonb 파라미터를 추가하면서 원래의 10개 파라미터
+-- 버전과는 다른 시그니처가 되어 Postgres가 이를 오버로드로 취급, 옛 버전이 grant와 함께
+-- 그대로 남아 호출 가능한 상태가 된다. 재실행 시 옛 오버로드를 먼저 제거해 정리한다.
+drop function if exists public.save_diagnosis_result(uuid, text, text, text, text, text, text, text, jsonb, jsonb);
+
 create or replace function public.save_diagnosis_result(
   p_session_id uuid,
   p_life_stage text,
