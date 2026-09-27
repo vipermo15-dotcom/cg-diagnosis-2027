@@ -78,6 +78,7 @@ export async function saveResult(
     p_result_summary: result.resultSummary,
     p_ai_profile: result.aiProfile,
     p_roadmap: result.roadmap,
+    p_course_comparison: result.courseComparison,
   })
   if (error) console.error('saveResult failed', error)
 }
@@ -100,6 +101,22 @@ export async function submitConsultation(
     console.error('submitConsultation failed', error)
     return { ok: false }
   }
+  return { ok: true }
+}
+
+export async function linkResultToEmail(
+  sessionId: string | null,
+  email: string,
+): Promise<{ ok: boolean; error?: string }> {
+  if (!isSupabaseConfigured || !supabase || !sessionId) {
+    stubLog('linkResultToEmail', { sessionId, email })
+    return { ok: true }
+  }
+  const { error } = await supabase.rpc('link_result_to_email', {
+    p_session_id: sessionId,
+    p_email: email,
+  })
+  if (error) return { ok: false, error: error.message }
   return { ok: true }
 }
 
